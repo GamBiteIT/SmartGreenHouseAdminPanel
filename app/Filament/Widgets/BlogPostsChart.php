@@ -51,6 +51,10 @@ class BlogPostsChart extends ApexChartWidget
         $temparray = $temp->pluck('temperature');
         $hmdty = $data->get('humidity');
         $hmdtyarray = $hmdty->pluck('humidity');
+        $soil = $data->get('soil');
+        $soilarray = $soil->pluck('soil');
+        // $light = $data->get('light');
+        // $lightarray = $light->pluck('light');
         $created_atArray = $created_at->pluck('created_at');
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
@@ -62,18 +66,29 @@ class BlogPostsChart extends ApexChartWidget
             'chart' => [
                 'type' => 'line',
                 'height' => 500,
-                'weight'=>2000
+
             ],
             'series' => [
                 [
                     'name' => 'Temperature',
                     'data' => $temarr,
+                    'color'=>'#0272ea'
                 ],
                   [
                     'name' => 'Humidity',
                     'data' => $hmdtyarray,
-                    'color'=>'#501635'
+                    'color'=>'#ac8d80'
                 ],
+                [
+                    'name' => 'Soil',
+                    'data' => $soilarray,
+                    'color'=>'#004d17'
+                ],
+                // [
+                //     'name' => 'Light',
+                //     'data' => $lightarray,
+                //     'color'=>'#ffb10a'
+                // ],
             ],
             'xaxis' => [
                 'categories' => $created_atarr,
@@ -92,7 +107,6 @@ class BlogPostsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#c0150c'],
             'stroke' => [
                 'curve' => 'smooth',
             ],
