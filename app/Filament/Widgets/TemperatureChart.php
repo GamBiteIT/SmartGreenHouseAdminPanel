@@ -41,10 +41,9 @@ protected static ?array $options = [
         $created_atArray = $created_at->pluck('created_at');
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
-        }
-        for ($i=0; $i <count($temparray) ; $i++) {
             $temarr[] = number_format($temparray[$i],2);
         }
+
 
 
 
