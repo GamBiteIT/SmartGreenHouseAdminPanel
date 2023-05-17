@@ -3,6 +3,8 @@
 namespace App\Filament\Widgets;
 
 use App\Models\SensorData;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class BlogPostsChart extends ApexChartWidget
@@ -19,7 +21,19 @@ class BlogPostsChart extends ApexChartWidget
      *
      * @var string|null
      */
-    protected static ?string $heading = 'TemperatureChart';
+    protected static ?string $heading = 'DataChart';
+    protected function getFormSchema(): array
+{
+    return [
+
+        DatePicker::make('date_start')
+            ->default('2023-01-01'),
+
+        DatePicker::make('date_end')
+            ->default('2023-12-31')
+
+    ];
+}
 
     /**
      * Chart options (series, labels, types, size, animations...)
@@ -29,10 +43,14 @@ class BlogPostsChart extends ApexChartWidget
      */
     protected function getOptions(): array
     {
+        $dateStart = $this->filterFormData['date_start'];
+        $dateEnd = $this->filterFormData['date_end'];
         $data = SensorData::orderBy('created_at','asc');
         $temp = $data->get('temperature');
         $created_at  = $data->get('created_at');
         $temparray = $temp->pluck('temperature');
+        $hmdty = $data->get('humidity');
+        $hmdtyarray = $hmdty->pluck('humidity');
         $created_atArray = $created_at->pluck('created_at');
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
@@ -40,14 +58,21 @@ class BlogPostsChart extends ApexChartWidget
         }
 
         return [
+
             'chart' => [
                 'type' => 'line',
-                'height' => 300,
+                'height' => 500,
+                'weight'=>2000
             ],
             'series' => [
                 [
                     'name' => 'Temperature',
                     'data' => $temarr,
+                ],
+                  [
+                    'name' => 'Humidity',
+                    'data' => $hmdtyarray,
+                    'color'=>'#501635'
                 ],
             ],
             'xaxis' => [
@@ -67,7 +92,7 @@ class BlogPostsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#6366f1'],
+            'colors' => ['#c0150c'],
             'stroke' => [
                 'curve' => 'smooth',
             ],
