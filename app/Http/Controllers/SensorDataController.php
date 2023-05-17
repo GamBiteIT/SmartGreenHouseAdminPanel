@@ -34,7 +34,7 @@ class SensorDataController extends Controller
 
         $data->season_id = $request->season_id;
         $data->humidity = $request->humidity;
-        $data->temperature = $request->temperature;
+        $data->temperature = number_format($request->temperature,2);
         $data->soil = $request->soil;
         $data->light = $request->light;
 

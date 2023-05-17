@@ -3,8 +3,12 @@
 
 use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\DevicesStatsOverview;
+use App\Filament\Widgets\HumidityChart;
 use App\Filament\Widgets\LatestData;
+use App\Filament\Widgets\LightChart;
 use App\Filament\Widgets\ParametreTested;
+use App\Filament\Widgets\SeasonTable;
+use App\Filament\Widgets\SoilChart;
 use App\Filament\Widgets\TemperatureChart;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
@@ -148,11 +152,15 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-
+          ParametreTested::class,
+          SeasonTable::class,
           DataStatsOverview::class,
           DevicesStatsOverview::class,
           TemperatureChart::class,
-          ParametreTested::class,
+          HumidityChart::class,
+          SoilChart::class,
+          LightChart::class
+
         //   LatestData::class
 
         ],

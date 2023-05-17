@@ -39,6 +39,9 @@ protected static ?array $options = [
         $created_at  = $data->get('created_at');
         $temparray = $temp->pluck('temperature');
         $created_atArray = $created_at->pluck('created_at');
+        for ($i=0; $i < count($created_atArray); $i++) {
+            $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
+        }
 
 
 
@@ -48,10 +51,10 @@ protected static ?array $options = [
                     [
                         'data' => $temparray,
                         'borderColor'=> '#36A2EB',
-                        'backgroundColor'=> '#9BD0F5',
+                        'backgroundColor'=> '#ffb10a',
                     ],
                 ],
-                'labels' => $created_atArray,
+                'labels' => $created_atarr,
             ];
 
     }
