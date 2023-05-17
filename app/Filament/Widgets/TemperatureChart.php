@@ -42,6 +42,9 @@ protected static ?array $options = [
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
         }
+        for ($i=0; $i <count($temparray) ; $i++) {
+            $temarr[] = number_format($temparray[$i],2);
+        }
 
 
 
@@ -49,7 +52,7 @@ protected static ?array $options = [
             return [
                 'datasets' => [
                     [
-                        'data' => $temparray,
+                        'data' => $temarr,
                         'borderColor'=> '#36A2EB',
                         'backgroundColor'=> '#ffb10a',
                     ],

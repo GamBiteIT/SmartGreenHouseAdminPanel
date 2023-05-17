@@ -36,7 +36,9 @@ class BlogPostsChart extends ApexChartWidget
         $created_atArray = $created_at->pluck('created_at');
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
+             $temarr[] = number_format($temparray[$i],2);
         }
+
         return [
             'chart' => [
                 'type' => 'line',
@@ -45,7 +47,7 @@ class BlogPostsChart extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Temperature',
-                    'data' => $temparray,
+                    'data' => $temarr,
                 ],
             ],
             'xaxis' => [
