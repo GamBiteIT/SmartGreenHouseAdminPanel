@@ -16,6 +16,10 @@ class SoilChart extends LineChartWidget
             ],
         ],
     ];
+    protected function getHeading(): string
+    {
+        return 'Soil Chart';
+    }
 
     protected function getData(): array
     {

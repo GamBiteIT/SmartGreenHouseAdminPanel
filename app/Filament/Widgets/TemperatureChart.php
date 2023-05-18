@@ -12,7 +12,7 @@ class TemperatureChart extends LineChartWidget
     protected static ?string $heading = 'Chart';
     protected function getHeading(): string
     {
-        return 'Temperature';
+        return 'Temperature Chart';
     }
 //     protected function getFilters(): ?array
 // {

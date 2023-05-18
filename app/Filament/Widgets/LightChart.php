@@ -16,6 +16,10 @@ class LightChart extends LineChartWidget
             ],
         ],
     ];
+    protected function getHeading(): string
+    {
+        return 'Light Chart';
+    }
 
     protected function getData(): array
     {

@@ -1,28 +1,23 @@
 <?php
 
-
+use App\Filament\Widgets\Charts;
 use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\DevicesStatsOverview;
-use App\Filament\Widgets\HumidityChart;
-use App\Filament\Widgets\LatestData;
-use App\Filament\Widgets\LightChart;
 use App\Filament\Widgets\ParametreTested;
 use App\Filament\Widgets\SeasonTable;
-use App\Filament\Widgets\SoilChart;
-use App\Filament\Widgets\TemperatureChart;
-use Filament\Facades\Filament;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Http\Middleware\MirrorConfigToSubpackages;
+use App\Models\Devices;
 use Filament\Pages;
-use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\MirrorConfigToSubpackages;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Widgets\Widget;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 return [
 
@@ -152,16 +147,16 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-          ParametreTested::class,
-          SeasonTable::class,
-          DataStatsOverview::class,
-          DevicesStatsOverview::class,
-          TemperatureChart::class,
-          HumidityChart::class,
-          SoilChart::class,
-          LightChart::class
+        ParametreTested::class,
+        SeasonTable::class,
+        DataStatsOverview::class,
+        DevicesStatsOverview::class,
+        Charts::class,
+        //   Filament\Widgets\SeasonTable::class,
+        //   Filament\Widgets\DataStatsOverview::class,
+        //   Filament\Widgets\DevicesStatsOverview::class,
+        //   Filament\Widgets\Charts::class
 
-        //   LatestData::class
 
         ],
     ],

@@ -16,6 +16,10 @@ class HumidityChart extends LineChartWidget
             ],
         ],
     ];
+    protected function getHeading(): string
+    {
+        return 'Humidty Chart';
+    }
 
     protected function getData(): array
     {
