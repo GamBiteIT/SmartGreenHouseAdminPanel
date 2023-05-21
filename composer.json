@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.1",
         "filament/filament": "^2.0",
-        "filament/notifications": "^2.0",
         "flowframe/laravel-trend": "^0.1.5",
         "guzzlehttp/guzzle": "^7.2",
         "kenepa/multi-widget": "^1.0",

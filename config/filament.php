@@ -186,7 +186,7 @@ return [
     |
     */
 
-    'dark_mode' => true,
+    'dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -199,7 +199,7 @@ return [
     */
 
     'database_notifications' => [
-        'enabled' => false,
+        'enabled' => true,
         'polling_interval' => '30s',
     ],
 
