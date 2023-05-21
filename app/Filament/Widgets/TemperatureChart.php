@@ -10,6 +10,7 @@ class TemperatureChart extends LineChartWidget
     protected static ?string $pollingInterval = '5s';
     protected static ?string $maxHeight = '300px';
     protected static ?string $heading = 'Chart';
+    public ?string $filter = 'today';
     protected function getHeading(): string
     {
         return 'Temperature Chart';
@@ -20,7 +21,6 @@ class TemperatureChart extends LineChartWidget
 //         'today' => 'Today',
 //         'week' => 'Last week',
 //         'month' => 'Last month',
-//         'year' => 'This year',
 //     ];
 // }
 protected static ?array $options = [

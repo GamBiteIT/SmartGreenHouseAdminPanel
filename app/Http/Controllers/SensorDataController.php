@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSensorDataRequest;
-use App\Http\Requests\UpdateSensorDataRequest;
+use App\Models\User;
+use App\Models\Parametre;
 use App\Models\SensorData;
 use Illuminate\Http\Request;
+use Filament\Notifications\Notification;
+use App\Http\Requests\UpdateSensorDataRequest;
 
 class SensorDataController extends Controller
 {
@@ -39,6 +41,17 @@ class SensorDataController extends Controller
         $data->light = $request->light;
 
         $data->save();
+        $parametre = Parametre::latest()->first();
+
+        if($request->temperature>$parametre['TemperatureValeur']){
+            Notification::make()
+            ->title('Hot Temperature Detected')
+            // ->icon('heroicon-o-sun')
+            ->body("Temperature is {$request->temperature} °C")
+            ->sendToDatabase(User::first());
+        }
+
+
 
         return response()->json([
             'data' => $data,
