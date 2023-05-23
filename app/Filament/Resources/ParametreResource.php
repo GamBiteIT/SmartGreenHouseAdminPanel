@@ -19,7 +19,7 @@ use App\Models\Season;
 class ParametreResource extends Resource
 {
     protected static ?string $model = Parametre::class;
-    protected static bool $shouldRegisterNavigation = true;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments';
     protected static ?string $navigationGroup = 'Parametre';

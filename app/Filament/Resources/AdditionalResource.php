@@ -37,13 +37,13 @@ class AdditionalResource extends Resource
                     Select::make('season_id')
                     ->label('Season Name')
                     ->options(Season::all()->pluck('name', 'id'))
-                    ->searchable(),
-                    TextInput::make('name')->label("Name"),
-                    TextInput::make("quantity")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity"),
+                    ->searchable()->nullable(false),
+                    TextInput::make('name')->label("Name")->nullable(false),
+                    TextInput::make("quantity")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity")->nullable(false),
                     Select::make('retard')->options([
                         false=>"Non",
                         true=>"Oui",
-                    ])->label("Retard")
+                    ])->label("Retard")->nullable(false)
 
 
 
@@ -58,11 +58,11 @@ class AdditionalResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label("ID")->sortable()->nullable(false),
-                TextColumn::make('season_id')->label("Season Name")->nullable(false),
-                TextColumn::make("name")->nullable(false),
-                TextColumn::make('quantity')->suffix("    KG")->nullable(false),
-                BooleanColumn::make('retard')->label("Retard")->nullable(false)
+                TextColumn::make('id')->label("ID")->sortable(),
+                TextColumn::make('season_id')->label("Season Name"),
+                TextColumn::make("name"),
+                TextColumn::make('quantity')->suffix("    KG"),
+                BooleanColumn::make('retard')->label("Retard")
 
             ])
             ->filters([

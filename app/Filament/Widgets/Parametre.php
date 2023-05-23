@@ -20,13 +20,13 @@ class ParametreTested extends BaseWidget
         return [
 
             TextColumn::make('TemperatureValeur')
-                ->label('Temperature Valeur'),
+                ->label('Temperature Valeur')->suffix("     °C"),
                 TextColumn::make('HumidityValeur')
-                ->label('Humidity Valeur'),
+                ->label('Humidity Valeur')->suffix("     %"),
                 TextColumn::make('SoilValeur')
-                ->label('Soil Valeur'),
+                ->label('Soil Valeur')->suffix("     %"),
                 TextColumn::make('LightValeur')
-                ->label('Light Valeur'),
+                ->label('Light Valeur')->suffix("     Lux"),
         ];
     }
 

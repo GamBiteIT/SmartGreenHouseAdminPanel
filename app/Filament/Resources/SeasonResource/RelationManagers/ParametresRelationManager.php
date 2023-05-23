@@ -20,16 +20,17 @@ class ParametresRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
-                Select::make('season_name')
+                Select::make('season_id')
                 ->label('Season Name')
                 ->options(Season::all()->pluck('name', 'id'))
-                ->searchable(),
-                    TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C"),
-                    TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%"),
-                    TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%"),
-                    TextInput::make("LightValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux"),
+                ->searchable()->unique(),
+                    TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
+                    TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
+                    TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
+                    TextInput::make("LightValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux")->nullable(false),
 
 
             ]);
@@ -49,9 +50,10 @@ class ParametresRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
