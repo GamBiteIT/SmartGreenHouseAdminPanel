@@ -40,17 +40,46 @@ class SensorDataController extends Controller
         $data->soil = $request->soil;
         $data->light = $request->light;
 
-        $data->save();
-        $parametre = Parametre::latest()->first();
 
-        if($request->temperature>$parametre['TemperatureValeur']){
+        $parametre = Parametre::latest()->first();
+        $lastdata = SensorData::latest()->first();
+
+
+// if((float)$data["humidity"] != (float) $humidity ){
+
+
+        if($request->humidity != $lastdata['humidity'] && $request->humidity>$parametre['HumidityValeur']){
+            Notification::make()
+            ->title('Hot Humidty Detected')
+            // ->icon('heroicon-o-sun')
+            ->body("Humidity is {$request->humidity} %")
+            ->sendToDatabase(User::all());
+        }
+
+        if($request->temperature != $lastdata['temperature'] &&$request->temperature>$parametre['TemperatureValeur']){
             Notification::make()
             ->title('Hot Temperature Detected')
             // ->icon('heroicon-o-sun')
             ->body("Temperature is {$request->temperature} °C")
-            ->sendToDatabase(User::first());
+            ->sendToDatabase(User::all());
         }
 
+        if($request->soil != $lastdata['soil'] && $request->soil<$parametre['SoilValeur']){
+              Notification::make()
+            ->title('Dry Soil Detected')
+            // ->icon('heroicon-o-sun')
+            ->body("Soil is {$request->soil} %")
+            ->sendToDatabase(User::all());
+
+        }if($request->light != $lastdata['light'] && $request->light<$parametre['LightValeur']){
+              Notification::make()
+            ->title('Low Light Detected')
+            // ->icon('heroicon-o-sun')
+            ->body("Light is {$request->light} Lux")
+            ->sendToDatabase(User::all());
+
+        }
+        $data->save();
 
 
         return response()->json([
