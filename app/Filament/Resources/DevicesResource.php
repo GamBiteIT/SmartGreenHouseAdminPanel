@@ -31,11 +31,11 @@ class DevicesResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make("name")->maxLength(100),
+                    TextInput::make("name")->maxLength(100)->nullable(false),
                     Select::make('works')->options([
                         false=>"OFF",
                         true=>"ON",
-                    ])->label("ON/OFF")
+                    ])->label("ON/OFF")->nullable(false)
                 ])
             ]);
     }

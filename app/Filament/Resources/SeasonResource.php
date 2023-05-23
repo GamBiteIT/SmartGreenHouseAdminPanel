@@ -33,16 +33,16 @@ class SeasonResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make("name")->required()->label("Name"),
-                    TextInput::make("plant")->required(),
-                    TextInput::make("duree")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(30)->maxValue(90)->integer())->suffix("   Jours")->label("Durée"),
+                    TextInput::make("name")->required()->label("Name")->nullable(false),
+                    TextInput::make("plant")->required()->nullable(false),
+                    TextInput::make("duree")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(30)->maxValue(90)->integer())->suffix("   Jours")->label("Durée")->nullable(false),
                     Select::make('4season')->label("Les quatre saisons")
     ->options([
         'printemps' => 'Printemps',
         'été' => 'Été',
         'automne' => 'Automne',
         'hiver' => 'Hiver',
-    ]),
+    ])->nullable(false),
     TextInput::make('productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Productivity")->placeholder("Please fill this field after the season"),
                 ])
             ]);

@@ -58,11 +58,11 @@ class AdditionalResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('season_id')->label("Season Name"),
-                TextColumn::make("name"),
-                TextColumn::make('quantity')->suffix("    KG"),
-                BooleanColumn::make('retard')->label("Retard")
+                TextColumn::make('id')->label("ID")->sortable()->nullable(false),
+                TextColumn::make('season_id')->label("Season Name")->nullable(false),
+                TextColumn::make("name")->nullable(false),
+                TextColumn::make('quantity')->suffix("    KG")->nullable(false),
+                BooleanColumn::make('retard')->label("Retard")->nullable(false)
 
             ])
             ->filters([

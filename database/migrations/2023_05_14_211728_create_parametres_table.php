@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('parametres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('season_id')->constrained()->onDelete('cascade')->onUpdate("cascade");
+            $table->foreignId('season_id')->unique()->constrained()->onDelete('cascade')->onUpdate("cascade");
             $table->float('TemperatureValeur');
             $table->float('HumidityValeur');
             $table->float('SoilValeur');

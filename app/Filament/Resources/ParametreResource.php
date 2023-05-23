@@ -33,11 +33,11 @@ class ParametreResource extends Resource
                     Select::make('season_id')
                     ->label('Season Name')
                     ->options(Season::all()->pluck('name', 'id'))
-                    ->searchable(),
-                    TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C"),
-                    TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%"),
-                    TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%"),
-                    TextInput::make("LightValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux"),
+                    ->searchable()->unique(),
+                    TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
+                    TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
+                    TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
+                    TextInput::make("LightValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux")->nullable(false),
 
 
 
@@ -52,7 +52,7 @@ class ParametreResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('season_id')->label("Season Name"),
+                TextColumn::make('season.name')->label("Season Name"),
                 TextColumn::make('TemperatureValeur')->suffix("   °C"),
                 TextColumn::make('HumidityValeur')->suffix("   %"),
                 TextColumn::make('SoilValeur')->suffix("   %"),
