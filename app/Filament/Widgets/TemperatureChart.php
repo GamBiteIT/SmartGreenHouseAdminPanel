@@ -18,7 +18,7 @@ class TemperatureChart extends LineChartWidget
 //     protected function getFilters(): ?array
 // {
 //     return [
-//         'today' => 'Today',
+//         'today' => 'May 20,2023',
 //         'week' => 'Last week',
 //         'month' => 'Last month',
 //     ];
@@ -33,7 +33,7 @@ protected static ?array $options = [
 
     protected function getData(): array
     {
-        $activeFilter = $this->filter;
+        // $activeFilter = $this->filter;
         $data = SensorData::orderBy('created_at','asc');
         $temp = $data->get('temperature');
         $created_at  = $data->get('created_at');

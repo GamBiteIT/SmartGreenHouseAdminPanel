@@ -20,7 +20,7 @@ class SeasonTable extends BaseWidget
     {
         return [
             TextColumn::make('id')->label("ID"),
-            TextColumn::make('name')->label("Name")->sortable()->searchable(),
+            TextColumn::make('name')->label("Name"),
             TextColumn::make('plant.name')->label('Plant Name'),
             TextColumn::make('start_day')->date(),
             TextColumn::make('end_day')->date(),

@@ -17,10 +17,10 @@ class ListDevices extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            DevicesStatsOverview::class,
-        ];
-    }
+    // protected function getHeaderWidgets(): array
+    // {
+    //     return [
+    //         DevicesStatsOverview::class,
+    //     ];
+    // }
 }
