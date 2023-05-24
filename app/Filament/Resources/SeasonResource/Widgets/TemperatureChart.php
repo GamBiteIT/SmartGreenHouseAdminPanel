@@ -8,7 +8,7 @@ use Filament\Widgets\LineChartWidget;
 class TemperatureChart extends LineChartWidget
 {
     protected static ?string $pollingInterval = '5s';
-    protected static ?string $maxHeight = '300px';
+    // protected static ?string $maxHeight = '300px';
     protected static ?string $heading = 'Chart';
     public ?string $filter = 'today';
     protected function getHeading(): string

@@ -4,14 +4,13 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\Widget;
 use Kenepa\MultiWidget\MultiWidget;
-use App\Filament\Widgets\TemperatureChartV2;
+use App\Filament\Widgets\TemperatureChart;
+
 
 class Charts extends MultiWidget
 {
     public array $widgets = [
-    //    BlogPostsChart::class
-          TemperatureChart::class,
-        // TemperatureChartV2::class,
+   TemperatureChart::class,
 
       HumidityChart::class,
       SoilChart::class,

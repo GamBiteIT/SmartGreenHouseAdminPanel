@@ -5,6 +5,7 @@ use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\DevicesStatsOverview;
 use App\Filament\Widgets\ParametreTested;
 use App\Filament\Widgets\SeasonTable;
+use App\Filament\Widgets\TemperatureChart;
 use App\Models\Devices;
 use Filament\Pages;
 use Filament\Http\Middleware\Authenticate;
@@ -152,6 +153,7 @@ return [
         DataStatsOverview::class,
         DevicesStatsOverview::class,
         Charts::class,
+        TemperatureChart::class
         //   Filament\Widgets\SeasonTable::class,
         //   Filament\Widgets\DataStatsOverview::class,
         //   Filament\Widgets\DevicesStatsOverview::class,
