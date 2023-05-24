@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
-            $table->string("plant");
-            $table->integer("duree");
+            $table->foreignId('plant_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->float('quantity_planty');
+            $table->float('expected_productivity');
+            $table->timestamp('start_day');
+            $table->timestamp('end_day');
             $table->string("4season");
             $table->float('productivity')->default(0.0)->nullable();
             $table->timestamps();

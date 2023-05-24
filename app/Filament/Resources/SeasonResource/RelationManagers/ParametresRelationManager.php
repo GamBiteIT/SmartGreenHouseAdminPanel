@@ -25,8 +25,8 @@ class ParametresRelationManager extends RelationManager
             ->schema([
                 Select::make('season_id')
                 ->label('Season Name')
-                ->options(Season::all()->pluck('name', 'id'))
-                ->searchable()->unique(),
+                ->options(Season::all()->pluck('name', 'id'))->unique() ->visibleOn('create')
+                ->searchable(),
                     TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
                     TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
                     TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
@@ -50,6 +50,7 @@ class ParametresRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([

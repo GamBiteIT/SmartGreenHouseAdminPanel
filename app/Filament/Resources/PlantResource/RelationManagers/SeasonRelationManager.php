@@ -1,34 +1,26 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\PlantResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Plant;
-use App\Models\Season;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\SeasonResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SeasonResource\RelationManagers;
-use App\Filament\Resources\SeasonResource\RelationManagers\ParametresRelationManager;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class SeasonResource extends Resource
+class SeasonRelationManager extends RelationManager
 {
-    protected static ?string $model = Season::class;
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static string $relationship = 'season';
 
-    protected static ?string $navigationIcon = 'heroicon-s-document-text';
-    protected static ?string $navigationGroup = 'Season';
-    protected static ?int $navigationSort = 0;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -42,8 +34,8 @@ class SeasonResource extends Resource
                     ->searchable()->nullable(false),
                     DatePicker::make('start_day')->nullable(false),
                     DatePicker::make('end_day')->nullable(false),
-                    TextInput::make('quantity_planty')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity Planty")->nullable(false),
-                    TextInput::make('expected_productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Expected Productivity")->nullable(false),
+                    TextInput::make('quantity_planty')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity Planty"),
+                    TextInput::make('expected_productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Expected Productivity"),
                     Select::make('4season')->label("Les quatre saisons")
     ->options([
         'printemps' => 'Printemps',
@@ -60,9 +52,9 @@ class SeasonResource extends Resource
     {
         return $table
             ->columns([
+                // Tables\Columns\TextColumn::make('name'),
                 TextColumn::make('id')->label("ID"),
                 TextColumn::make('name')->label("Name")->sortable()->searchable(),
-                TextColumn::make('plant.name')->label('Plant Name'),
                 TextColumn::make('start_day')->date(),
                 TextColumn::make('end_day')->date(),
                 TextColumn::make('quantity_planty')->suffix("      KG"),
@@ -70,41 +62,19 @@ class SeasonResource extends Resource
                 TextColumn::make('4season')->label("Les quatre saisons"),
                 TextColumn::make('productivity')->label("productivity")->suffix("     KG"),
                 TextColumn::make('created_at')->dateTime()
-
             ])
             ->filters([
-                SelectFilter::make('4season')->label("Les quatre saisons")
-    ->options([
-        'printemps' => 'Printemps',
-        'été' => 'Été',
-        'automne' => 'Automne',
-        'hiver' => 'Hiver',
-    ])
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            RelationManagers\ParametresRelationManager::class,
-            RelationManagers\SensordataRelationManager::class,
-            RelationManagers\ExtraRelationManager::class,
-
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListSeasons::route('/'),
-            'create' => Pages\CreateSeason::route('/create'),
-            'edit' => Pages\EditSeason::route('/{record}/edit'),
-        ];
     }
 }

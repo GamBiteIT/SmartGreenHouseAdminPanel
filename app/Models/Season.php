@@ -9,7 +9,7 @@ class Season extends Model
 {
 
     use HasFactory;
-    protected $fillable = ["name","plant","duree","4season","productivity"];
+    protected $fillable = ["name","plant_id","start_day","end_day","quantity_planty","expected_productivity","4season","productivity"];
 
     public function parametres(){
         return $this->hasOne(Parametre::class);
@@ -20,4 +20,8 @@ class Season extends Model
     public function extra(){
         return $this->hasMany(Additional::class);
     }
+    public function plant(){
+        return $this->belongsTo(Plant::class);
+    }
+
 }

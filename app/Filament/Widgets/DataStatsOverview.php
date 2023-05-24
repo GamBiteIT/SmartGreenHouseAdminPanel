@@ -16,39 +16,61 @@ class DataStatsOverview extends BaseWidget
     {
         $data = SensorData::latest()->first();
         $param = Parametre::latest()->first();
-        if($param->TemperatureValeur>$data->temperature){
+        if($data==null){
+            $temperature = 0.0;
+            $humidity = 0.0;
+            $soil=0.0;
+            $light=0.0;
+         }else{
+            $temperature = number_format($data->temperature,1).'   °C';
+            $humidity = intval($data->humidity).'   %';
+            $soil = intval($data->soil).'   %';
+            $light = intval($data->light).'   Lux';
+         }
+        if($param == null){
             $situation = "Cool";
             $colorTemp = 'success';
-        }else{
-            $situation = "Hot";
-            $colorTemp = "danger";
-        }
-        if($param->HumidityValeur>$data->humidity){
             $situationH = "Bien";
             $colorH = 'success';
-        }else{
-            $situationH = "Pas Bien";
-            $colorH = "danger";
-        }
-        if($param->SoilValeur>$data->soil){
-
-            $situationS = "Dry";
-            $colorS = "danger";
-        }else{
             $situationS = "Wet";
-            $colorS = 'success';
-        }
-        if($param->LightValeur>$data->light){
-            $situationL = "Dark";
-            $colorL = 'danger';
-        }else{
+            $colorS = "success";
             $situationL = "Light";
             $colorL = "success";
-        }
-        $temperature = number_format($data->temperature,1).'   °C';
-        $humidity = intval($data->humidity).'   %';
-        $soil = intval($data->soil).'   %';
-        $light = intval($data->light).'   Lux';
+ }else{
+
+            if($param->TemperatureValeur>$data->temperature){
+                $situation = "Cool";
+                $colorTemp = 'success';
+            }else{
+                $situation = "Hot";
+                $colorTemp = "danger";
+            }
+            if($param->HumidityValeur>$data->humidity){
+                $situationH = "Bien";
+                $colorH = 'success';
+            }else{
+                $situationH = "Pas Bien";
+                $colorH = "danger";
+            }
+            if($param->SoilValeur>$data->soil){
+
+                $situationS = "Dry";
+                $colorS = "danger";
+            }else{
+                $situationS = "Wet";
+                $colorS = 'success';
+            }
+            if($param->LightValeur>$data->light){
+                $situationL = "Dark";
+                $colorL = 'danger';
+            }else{
+                $situationL = "Light";
+                $colorL = "success";
+            }}
+
+
+
+
 
         return [
              Card::make('Temperature',$temperature) ->description($situation)->color($colorTemp),
