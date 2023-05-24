@@ -9,13 +9,14 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PlantResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PlantResource\RelationManagers;
 use App\Filament\Resources\PlantResource\RelationManagers\SeasonRelationManager;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
 
 class PlantResource extends Resource
 {
@@ -32,6 +33,13 @@ class PlantResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make("name")->required()->label("Name")->nullable(false),
+                    Select::make('type')->label("Type")
+                    ->options([
+                        'Tomato' => 'Tomato',
+                        'Potato' => 'Potato',
+                    ])->nullable(false),
+                    TextInput::make('duree_de_plontation')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Jours")->nullable(false),
+                    TextInput::make('productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG/HA")->nullable(false),
 
                 ])
             ]);
@@ -42,7 +50,10 @@ class PlantResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('name')
+                TextColumn::make('name'),
+                TextColumn::make('type'),
+                TextColumn::make('duree_de_plontation'),
+                TextColumn::make('productivity'),
             ])
             ->filters([
                 //

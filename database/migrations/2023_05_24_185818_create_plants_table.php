@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
+            $table->integer('duree_de_plontation');
+            $table->float('productivity');
             $table->timestamps();
         });
     }
