@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Devices;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreDevicesRequest;
-use App\Http\Requests\UpdateDevicesRequest;
+
 
 
 class DevicesController extends Controller
@@ -45,9 +44,18 @@ class DevicesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDevicesRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = new Devices;
+
+        $data->fan = $request->fan;
+        $data->pump = $request->pump;
+        $data->led = $request->led;
+        $data->save();
+        return response()->json([
+            'data' => $data,
+        ]);
+
     }
 
     /**

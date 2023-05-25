@@ -13,24 +13,27 @@ class DevicesStatsOverview extends BaseWidget
 
     protected function getCards(): array
     {
-        $fan = Devices::find(1);
-    $pump = Devices::find(2);
-    $led = Devices::find(3);
-    if($fan->works == 0 ){
+    $data = Devices::latest()->first();
+    if($data == null){
+        $fanstatus = "OFF";
+        $pumpstatus = "OFF";
+        $ledstatus = "OFF";
+    }else{
+    if($data->fan == 0 ){
       $fanstatus = "OFF";
     }else{
         $fanstatus = "ON";
     }
-    if($pump->works == 0 ){
+    if($data->pump == 0 ){
         $pumpstatus = "OFF";
       }else{
           $pumpstatus = "ON";
       }
-      if($led->works == 0 ){
+      if($data->led == 0 ){
         $ledstatus = "OFF";
       }else{
           $ledstatus = "ON";
-      }
+      }}
         return [
             Card::make('FAN',$fanstatus),
             Card::make('PUMP',$pumpstatus),

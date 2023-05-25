@@ -30,13 +30,13 @@ class DevicesResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()->schema([
-                    TextInput::make("name")->maxLength(100)->nullable(false),
-                    Select::make('works')->options([
-                        false=>"OFF",
-                        true=>"ON",
-                    ])->label("ON/OFF")->nullable(false)
-                ])
+                // Card::make()->schema([
+                //     TextInput::make("name")->maxLength(100)->nullable(false),
+                //     Select::make('works')->options([
+                //         false=>"OFF",
+                //         true=>"ON",
+                //     ])->label("ON/OFF")->nullable(false)
+                // ])
             ]);
     }
 
@@ -45,11 +45,25 @@ class DevicesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('name')->searchable(),
-                BooleanColumn::make('works')->label("ON/OFF")
+                BooleanColumn::make('fan')->label("FAN"),
+                BooleanColumn::make('pump')->label("PUMP"),
+                BooleanColumn::make('led')->label("LED"),
+                TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
-                SelectFilter::make('works')->label("ON/OFF")
+                SelectFilter::make('fan')->label("FAN")
+                ->options([
+                    true => 'ON',
+                    false=>'OFF'
+
+                ]),
+                SelectFilter::make('pump')->label("PUMP")
+                ->options([
+                    true => 'ON',
+                    false=>'OFF'
+
+                ]),
+                SelectFilter::make('led')->label("LED")
                 ->options([
                     true => 'ON',
                     false=>'OFF'

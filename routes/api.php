@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('parametre/',[ParametreController::class,'index']);
 Route::post('data/',[SensorDataController::class,'store']);
-Route::post('device/',[DevicesController::class,'index']);
+Route::post('device/',[DevicesController::class,'store']);
+// Route::post(device/)
 // Route::put('device/{devices}',[DevicesController::class,'update']);

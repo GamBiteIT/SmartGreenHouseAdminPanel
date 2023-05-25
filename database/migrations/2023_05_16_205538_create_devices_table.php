@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('works');
+            $table->boolean('fan');
+            $table->boolean('pump');
+            $table->boolean('led');
             $table->timestamps();
         });
     }

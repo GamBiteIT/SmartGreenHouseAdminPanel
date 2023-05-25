@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Devices extends Model
 {
     use HasFactory;
-    protected $fillable = ["name","works"];
+    protected $fillable = ["fan","pump","led"];
     protected $casts = [
-        'works'=>'boolean',
+        'fan'=>'boolean',
+        'pump'=>'boolean',
+        'led'=>'boolean',
     ];
 }

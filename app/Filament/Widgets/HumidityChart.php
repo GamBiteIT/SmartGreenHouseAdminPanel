@@ -29,6 +29,7 @@ class HumidityChart extends LineChartWidget
         $created_at  = $data->get('created_at');
         $hmdtyarray = $hmdty->pluck('humidity');
         $created_atArray = $created_at->pluck('created_at');
+        $created_atarr = [];
         for ($i=0; $i < count($created_atArray); $i++) {
             $created_atarr[] = \Carbon\Carbon::parse($created_atArray[$i])->format('M d, Y H:i:s');
         }
