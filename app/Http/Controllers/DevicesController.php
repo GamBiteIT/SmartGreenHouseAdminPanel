@@ -47,7 +47,7 @@ class DevicesController extends Controller
     public function store(Request $request)
     {
         $data = new Devices;
-
+       $data->season_id = $request->season_id;
         $data->fan = $request->fan;
         $data->pump = $request->pump;
         $data->led = $request->led;

@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Season;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Devices extends Model
 {
     use HasFactory;
-    protected $fillable = ["fan","pump","led"];
+    protected $fillable = ["season_id","fan","pump","led"];
     protected $casts = [
         'fan'=>'boolean',
         'pump'=>'boolean',
         'led'=>'boolean',
     ];
+    public function season(){
+        return $this->belongsTo(Season::class);
+    }
 }

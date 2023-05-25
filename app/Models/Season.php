@@ -23,5 +23,8 @@ class Season extends Model
     public function plant(){
         return $this->belongsTo(Plant::class);
     }
+    public function device(){
+        return $this->hasMany(Devices::class);
+    }
 
 }

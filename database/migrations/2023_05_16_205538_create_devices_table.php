@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('season_id')->constrained()->onDelete('cascade');
             $table->boolean('fan');
             $table->boolean('pump');
             $table->boolean('led');
