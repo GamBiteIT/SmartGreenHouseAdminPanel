@@ -48,6 +48,7 @@ class SensorDataController extends Controller
 // if((float)$data["humidity"] != (float) $humidity ){
 
 
+      if($lastdata != null && $parametre != null){
         if($request->humidity != $lastdata['humidity'] && $request->humidity>$parametre['HumidityValeur']){
             Notification::make()
             ->title('Hot Humidty Detected')
@@ -79,6 +80,9 @@ class SensorDataController extends Controller
             ->sendToDatabase(User::all());
 
         }
+
+
+      }
         $data->save();
 
 
