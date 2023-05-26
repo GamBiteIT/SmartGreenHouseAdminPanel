@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Season;
 use App\Models\Parametre;
 use App\Models\SensorData;
 use Illuminate\Http\Request;
