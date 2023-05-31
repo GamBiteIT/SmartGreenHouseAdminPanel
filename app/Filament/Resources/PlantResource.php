@@ -17,10 +17,25 @@ use App\Filament\Resources\PlantResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PlantResource\RelationManagers;
 use App\Filament\Resources\PlantResource\RelationManagers\SeasonRelationManager;
+use Illuminate\Database\Eloquent\Model;
+
 
 class PlantResource extends Resource
 {
     protected static ?string $model = Plant::class;
+    public static function getGloballySearchableAttributes(): array
+{
+    return ['type', 'name'];
+}
+public static function getGlobalSearchResultDetails(Model $record): array
+{
+    return [
+        'Name' => $record->name,
+        'Type' => $record->type,
+    ];
+}
+// protected static ?string $recordTitleAttribute = 'name';
+
 
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
