@@ -29,6 +29,7 @@ protected function getOptions(): array
     if($dateStart == null OR $dateEnd == null){
    $data = SensorData::all();
     }else{
+        $dateEnd = $dateEnd->addDays(1);
         $data = SensorData::whereBetween('created_at', [$dateStart,$dateEnd])->get();
     }
     return [
