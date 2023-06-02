@@ -1,12 +1,11 @@
 <?php
 
-use App\Filament\Widgets\Charts;
+use App\Filament\Resources\SensorDataResource\Widgets\TemperatureChart;
+use App\Filament\Widgets\ChartsFilter;
 use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\DevicesStatsOverview;
 use App\Filament\Widgets\ParametreTested;
 use App\Filament\Widgets\SeasonTable;
-use App\Filament\Widgets\TemperatureChart;
-use App\Models\Devices;
 use Filament\Pages;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -16,7 +15,6 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Widgets\Widget;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
@@ -152,12 +150,8 @@ return [
         SeasonTable::class,
         DataStatsOverview::class,
         DevicesStatsOverview::class,
-        Charts::class,
-        TemperatureChart::class
-        //   Filament\Widgets\SeasonTable::class,
-        //   Filament\Widgets\DataStatsOverview::class,
-        //   Filament\Widgets\DevicesStatsOverview::class,
-        //   Filament\Widgets\Charts::class
+        // ChartsFilter::class,
+        // // TemperatureChart::class
 
 
         ],

@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\SensorDataResource\Pages;
 
-use App\Filament\Resources\SensorDataResource;
-use App\Filament\Widgets\DataStatsOverview;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\SensorDataResource;
+use App\Filament\Resources\SensorDataResource\Widgets\Light;
+use App\Filament\Resources\SensorDataResource\Widgets\SoilChart;
+use App\Filament\Resources\SensorDataResource\Widgets\HumidityChart;
+use App\Filament\Resources\SensorDataResource\Widgets\TemperatureChart;
 
 class ListSensorData extends ListRecords
 {
@@ -14,7 +16,17 @@ class ListSensorData extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+TemperatureChart::class,
+HumidityChart::class,
+SoilChart::class,
+Light::class,
+
         ];
     }
 

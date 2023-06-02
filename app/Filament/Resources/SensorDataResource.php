@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SensorDataResource\Pages;
 use App\Filament\Resources\SensorDataResource\RelationManagers;
 use App\Filament\Widgets\DataStatsOverview;
+use App\Filament\Widgets\TemperatureChartApex;
 use App\Models\SensorData;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -57,7 +58,7 @@ class SensorDataResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 
