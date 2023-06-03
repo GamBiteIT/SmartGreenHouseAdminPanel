@@ -16,7 +16,7 @@ class ParametresRelationManager extends RelationManager
 {
     protected static string $relationship = 'parametres';
 
-    protected static ?string $recordTitleAttribute = 'TemperatureValeur';
+    protected static ?string $recordTitleAttribute = 'TemperatureValeur_max';
 
     public static function form(Form $form): Form
     {
@@ -27,10 +27,12 @@ class ParametresRelationManager extends RelationManager
                 ->label('Season Name')
                 ->options(Season::all()->pluck('name', 'id'))->unique() ->visibleOn('create')
                 ->searchable(),
-                    TextInput::make("TemperatureValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
+                    TextInput::make("TemperatureValeur_max")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
+                    TextInput::make("TemperatureValeur_min")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(15)->maxValue(35))->suffix("°C")->nullable(false),
                     TextInput::make("HumidityValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
                     TextInput::make("SoilValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(20)->maxValue(100))->suffix("%")->nullable(false),
-                    TextInput::make("LightValeur")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux")->nullable(false),
+                    TextInput::make("LightValeur_max")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux")->nullable(false),
+                    TextInput::make("LightValeur_min")->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true)->minValue(10000)->maxValue(20000))->suffix("lux")->nullable(false),
 
 
             ]);
@@ -41,10 +43,12 @@ class ParametresRelationManager extends RelationManager
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('TemperatureValeur')->suffix("   °C")->sortable(),
+                TextColumn::make('TemperatureValeur_max')->suffix("   °C")->sortable(),
+                TextColumn::make('TemperatureValeur_min')->suffix("   °C")->sortable(),
                 TextColumn::make('HumidityValeur')->suffix("   %")->sortable(),
                 TextColumn::make('SoilValeur')->suffix("   %")->sortable(),
-                TextColumn::make('LightValeur')->suffix("    lux")->sortable()
+                TextColumn::make('LightValeur_max')->suffix("    lux")->sortable(),
+                TextColumn::make('LightValeur_min')->suffix("    lux")->sortable()
             ])
             ->filters([
                 //

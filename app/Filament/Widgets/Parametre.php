@@ -23,14 +23,18 @@ class ParametreTested extends BaseWidget
     {
         return [
 
-            TextColumn::make('TemperatureValeur')
-                ->label('Temperature Valeur')->suffix("     °C"),
+            TextColumn::make('TemperatureValeur_max')
+                ->label('Temperature Valeur Max')->suffix("     °C"),
+                TextColumn::make('TemperatureValeur_min')
+                ->label('Temperature Valeur Min')->suffix("     °C"),
                 TextColumn::make('HumidityValeur')
                 ->label('Humidity Valeur')->suffix("     %"),
                 TextColumn::make('SoilValeur')
                 ->label('Soil Valeur')->suffix("     %"),
-                TextColumn::make('LightValeur')
-                ->label('Light Valeur')->suffix("     Lux"),
+                TextColumn::make('LightValeur_max')
+                ->label('Light Valeur Max')->suffix("     Lux"),
+                TextColumn::make('LightValeur_min')
+                ->label('Light Valeur Min')->suffix("     Lux"),
         ];
     }
 

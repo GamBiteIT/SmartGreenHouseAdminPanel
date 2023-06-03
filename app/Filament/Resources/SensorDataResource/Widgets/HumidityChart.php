@@ -60,7 +60,7 @@ protected function getOptions(): array
         $query->whereDate('created_at', '<', $dateen);
     }
 
-    $data = $query->get();
+    $data = $query->orderBy('created_at','ASC')->get();
     return [
         'chart' => [
             'type' => 'line',

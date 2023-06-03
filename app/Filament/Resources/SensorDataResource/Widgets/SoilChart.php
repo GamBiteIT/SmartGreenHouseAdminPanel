@@ -75,7 +75,7 @@ protected static bool $deferLoading = true;
             $query->whereDate('created_at', '<', $dateen);
         }
 
-        $data = $query->get();
+        $data = $query->orderBy('created_at','ASC')->get();
         return [
             'theme' => [
                 'mode' => 'dark' //dark

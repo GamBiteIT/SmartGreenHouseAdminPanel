@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('parametres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('season_id')->unique()->constrained()->onDelete('cascade')->onUpdate("cascade");
-            $table->float('TemperatureValeur');
+            $table->float('TemperatureValeur_max');
+            $table->float('TemperatureValeur_min');
             $table->float('HumidityValeur');
             $table->float('SoilValeur');
-            $table->float('LightValeur');
+            $table->float('LightValeur_max');
+            $table->float('LightValeur_min');
             $table->timestamps();
         });
     }

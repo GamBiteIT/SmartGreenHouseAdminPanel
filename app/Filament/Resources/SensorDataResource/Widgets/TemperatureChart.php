@@ -4,9 +4,10 @@ namespace App\Filament\Resources\SensorDataResource\Widgets;
 
 use Carbon\Carbon;
 use App\Models\SensorData;
-use Filament\Widgets\LineChartWidget;
-use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class TemperatureChart extends ApexChartWidget
@@ -63,7 +64,7 @@ protected function getOptions(): array
         $query->whereDate('created_at', '<', $dateen);
     }
 
-    $data = $query->get();
+    $data = $query->orderBy('created_at','ASC')->get();
 
 
 

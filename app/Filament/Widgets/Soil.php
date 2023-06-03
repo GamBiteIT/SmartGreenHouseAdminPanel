@@ -27,7 +27,7 @@ class Soil extends LineChartWidget
 
     protected function getData(): array
     {
-        $data = SensorData::all();
+        $data = SensorData::orderBy('created_at','ASC')->get();
         return [
             'datasets' => [
                 [

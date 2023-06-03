@@ -58,9 +58,16 @@ class SensorDataController extends Controller
             ->sendToDatabase(User::all());
         }
 
-        if($request->temperature != $lastdata['temperature'] &&$request->temperature>$parametre['TemperatureValeur']){
+        if($request->temperature != $lastdata['temperature'] &&$request->temperature>$parametre['TemperatureValeur_max']){
             Notification::make()
             ->title('Hot Temperature Detected')
+            // ->icon('heroicon-o-sun')
+            ->body("Temperature is {$request->temperature} °C")
+            ->sendToDatabase(User::all());
+        }
+        if($request->temperature != $lastdata['temperature'] &&$request->temperature<$parametre['TemperatureValeur_min']){
+            Notification::make()
+            ->title('Low Temperature Detected')
             // ->icon('heroicon-o-sun')
             ->body("Temperature is {$request->temperature} °C")
             ->sendToDatabase(User::all());
@@ -73,7 +80,7 @@ class SensorDataController extends Controller
             ->body("Soil is {$request->soil} %")
             ->sendToDatabase(User::all());
 
-        }if($request->light != $lastdata['light'] && $request->light<$parametre['LightValeur']){
+        }if($request->light != $lastdata['light'] && $request->light<$parametre['LightValeur_min']){
               Notification::make()
             ->title('Low Light Detected')
             // ->icon('heroicon-o-sun')
@@ -81,6 +88,14 @@ class SensorDataController extends Controller
             ->sendToDatabase(User::all());
 
         }
+        if($request->light != $lastdata['light'] && $request->light>$parametre['LightValeur_max']){
+            Notification::make()
+          ->title('High Light Detected')
+          // ->icon('heroicon-o-sun')
+          ->body("Light is {$request->light} Lux")
+          ->sendToDatabase(User::all());
+
+      }
 
 
       }
