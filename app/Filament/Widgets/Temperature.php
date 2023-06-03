@@ -9,6 +9,10 @@ class Temperature extends LineChartWidget
 {
     protected static ?string $heading = 'Temperature Chart';
     protected static ?string $pollingInterval = '5s';
+    public static function canView(): bool
+    {
+        return false;
+    }
     protected function getHeading(): string
     {
         return 'Temperature Chart';

@@ -15,6 +15,10 @@ class SeasonTable extends BaseWidget
     {
         return Season::query()->latest();
     }
+    public static function canView(): bool
+    {
+        return false;
+    }
 
     protected function getTableColumns(): array
     {

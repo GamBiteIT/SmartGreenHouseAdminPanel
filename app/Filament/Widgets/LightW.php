@@ -5,18 +5,20 @@ namespace App\Filament\Widgets;
 use App\Models\SensorData;
 use Filament\Widgets\LineChartWidget;
 
-class Humidity extends LineChartWidget
+class LightW extends LineChartWidget
 {
-    protected static ?string $heading = 'Humidity Chart';
+    protected static ?string $heading = 'Light Chart';
     protected static ?string $pollingInterval = '5s';
     public static function canView(): bool
     {
         return false;
     }
+
     protected function getHeading(): string
     {
-        return 'Humidity Chart';
+        return 'Light Chart';
     }
+
     protected static ?array $options = [
         'plugins' => [
             'legend' => [
@@ -24,19 +26,16 @@ class Humidity extends LineChartWidget
             ],
         ],
     ];
-
     protected function getData(): array
     {
         $data = SensorData::all();
         return [
             'datasets' => [
                 [
-                    'label' => 'Humidity',
-
-                    'data' => $data->map(fn ($value) => $value->humidity),
-                    'borderColor'=> '#75990B',
-                    'backgroundColor'=> '#990E0B',
-
+                    'label' => 'Light',
+                    'borderColor'=> '#004d17',
+                    'data' => $data->map(fn ($value) => $value->light),
+                    'backgroundColor'=> '#eaeaea',
 
                 ],
             ],

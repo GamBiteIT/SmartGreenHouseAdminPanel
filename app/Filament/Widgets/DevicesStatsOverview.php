@@ -9,7 +9,10 @@ use Filament\Widgets\StatsOverviewWidget\Card;
 class DevicesStatsOverview extends BaseWidget
 {
     protected static ?string $pollingInterval = '5s';
-
+    public static function canView(): bool
+    {
+        return false;
+    }
 
     protected function getCards(): array
     {

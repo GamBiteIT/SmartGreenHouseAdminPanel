@@ -9,6 +9,10 @@ class Soil extends LineChartWidget
 {
     protected static ?string $heading = 'Soil Chart';
     protected static ?string $pollingInterval = '5s';
+    public static function canView(): bool
+    {
+        return false;
+    }
     protected function getHeading(): string
     {
         return 'Soil Chart';

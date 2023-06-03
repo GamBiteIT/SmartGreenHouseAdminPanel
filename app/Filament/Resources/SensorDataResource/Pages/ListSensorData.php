@@ -4,6 +4,7 @@ namespace App\Filament\Resources\SensorDataResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\SensorDataResource;
+use App\Filament\Resources\SensorDataResource\Widgets\Charts;
 use App\Filament\Resources\SensorDataResource\Widgets\Light;
 use App\Filament\Resources\SensorDataResource\Widgets\SoilChart;
 use App\Filament\Resources\SensorDataResource\Widgets\HumidityChart;
@@ -22,10 +23,11 @@ class ListSensorData extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-TemperatureChart::class,
-HumidityChart::class,
-SoilChart::class,
-Light::class,
+// TemperatureChart::class,
+// HumidityChart::class,
+// SoilChart::class,
+// Light::class,
+Charts::class
 
         ];
     }

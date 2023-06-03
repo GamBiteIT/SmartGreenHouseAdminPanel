@@ -15,6 +15,10 @@ class ParametreTested extends BaseWidget
     {
         return ModelsParametre::query()->latest();
     }
+    public static function canView(): bool
+    {
+        return false;
+    }
     protected function getTableColumns(): array
     {
         return [

@@ -1,13 +1,14 @@
 <?php
 
-use App\Filament\Resources\SensorDataResource\Widgets\TemperatureChart;
-use App\Filament\Widgets\ChartsFilter;
+use Filament\Pages;
+use App\Filament\Widgets\Soil;
+use App\Filament\Widgets\Humidity;
+use App\Filament\Widgets\SeasonTable;
+use App\Filament\Widgets\Temperature;
+use App\Filament\Widgets\ParametreTested;
+use Filament\Http\Middleware\Authenticate;
 use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\DevicesStatsOverview;
-use App\Filament\Widgets\ParametreTested;
-use App\Filament\Widgets\SeasonTable;
-use Filament\Pages;
-use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -16,7 +17,13 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use App\Filament\Resources\SensorDataResource\Widgets\Light;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use App\Filament\Resources\SensorDataResource\Widgets\SoilChart;
+use App\Filament\Resources\SensorDataResource\Widgets\HumidityChart;
+use App\Filament\Resources\SensorDataResource\Widgets\TemperatureChart;
+use App\Filament\Widgets\Charts;
+use App\Filament\Widgets\ChartsStats;
 
 return [
 
@@ -150,6 +157,16 @@ return [
         SeasonTable::class,
         DataStatsOverview::class,
         DevicesStatsOverview::class,
+        TemperatureChart::class,
+        HumidityChart::class,
+        SoilChart::class,
+        Light::class,
+        Temperature::class,
+        Humidity::class,
+        Soil::class,
+        ChartsStats::class,
+        Charts::class,
+
         // ChartsFilter::class,
         // // TemperatureChart::class
 
