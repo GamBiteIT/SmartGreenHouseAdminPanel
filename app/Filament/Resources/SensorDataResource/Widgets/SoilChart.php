@@ -31,7 +31,7 @@ class SoilChart extends ApexChartWidget
     protected function getFormSchema(): array
 {
     return [
-        DatePicker::make('date_start')->required(),
+        DatePicker::make('date_start'),
         DatePicker::make('date_end')
     ];
 }
@@ -55,11 +55,11 @@ protected static bool $deferLoading = true;
         $dateEnd = $this->filterFormData['date_end'];
         $datest = '';
         $dateen = '';
-        if($dateStart != null){
+        if($dateStart !== null){
             $datest = Carbon::createFromFormat('Y-m-d H:i:s', $dateStart);
             $datest = $datest->toDateString();
         }
-        if($dateEnd != null){
+        if($dateEnd !== null){
             $dateen = Carbon::createFromFormat('Y-m-d H:i:s', $dateEnd);
             $dateen = $dateen->addDay(1);
             $dateen = $dateen->toDateString();
@@ -72,7 +72,7 @@ protected static bool $deferLoading = true;
         } elseif ($dateStart !== null) {
             $query->whereDate('created_at', '>=', $datest);
         } elseif ($dateEnd !== null) {
-            $query->whereDate('created_at', '<=', $dateen);
+            $query->whereDate('created_at', '<', $dateen);
         }
 
         $data = $query->get();

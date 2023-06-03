@@ -60,7 +60,7 @@ protected function getOptions(): array
     } elseif ($dateStart !== null) {
         $query->whereDate('created_at', '>=', $datest);
     } elseif ($dateEnd !== null) {
-        $query->whereDate('created_at', '<=', $dateen);
+        $query->whereDate('created_at', '<', $dateen);
     }
 
     $data = $query->get();
