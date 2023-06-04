@@ -54,20 +54,23 @@ protected function getOptions(): array
         $dateen = $dateen->addDay(1);
         $dateen = $dateen->toDateString();
     }
+    $query = Season::latest()->first();
 
-    $query = Season::latest()->first()->sensordata();
+    if($query == null){
+        $data = collect();
+    }else{
+        $query = $query->sensordata();
+        if ($dateStart !== null && $dateEnd !== null) {
+            $query->whereBetween('created_at', [$datest, $dateen]);
+        } elseif ($dateStart !== null) {
+            $query->whereDate('created_at', '>=', $datest);
+        } elseif ($dateEnd !== null) {
+            $query->whereDate('created_at', '<', $dateen);
+        }
 
-
-    if ($dateStart !== null && $dateEnd !== null) {
-        $query->whereBetween('created_at', [$datest, $dateen]);
-    } elseif ($dateStart !== null) {
-        $query->whereDate('created_at', '>=', $datest);
-    } elseif ($dateEnd !== null) {
-        $query->whereDate('created_at', '<', $dateen);
+ $data = $query->orderBy('created_at','ASC')->get();
     }
 
-    // $data =$season_latest->sensordata()->orderBy('created_at','ASC')->get();
-    $data = $query->orderBy('created_at','ASC')->get();
 
 
 

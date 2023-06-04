@@ -51,17 +51,22 @@ protected function getOptions(): array
         $dateen = $dateen->toDateString();
     }
 
-    $query = Season::latest()->first()->sensordata();
+    $query = Season::latest()->first();
 
-    if ($dateStart !== null && $dateEnd !== null) {
-        $query->whereBetween('created_at', [$datest, $dateen]);
-    } elseif ($dateStart !== null) {
-        $query->whereDate('created_at', '>=', $datest);
-    } elseif ($dateEnd !== null) {
-        $query->whereDate('created_at', '<', $dateen);
+    if($query == null){
+        $data = collect();
+    }else{
+        $query = $query->sensordata();
+        if ($dateStart !== null && $dateEnd !== null) {
+            $query->whereBetween('created_at', [$datest, $dateen]);
+        } elseif ($dateStart !== null) {
+            $query->whereDate('created_at', '>=', $datest);
+        } elseif ($dateEnd !== null) {
+            $query->whereDate('created_at', '<', $dateen);
+        }
+
+ $data = $query->orderBy('created_at','ASC')->get();
     }
-
-    $data = $query->orderBy('created_at','ASC')->get();
     return [
         'chart' => [
             'type' => 'line',

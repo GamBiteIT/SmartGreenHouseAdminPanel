@@ -9,4 +9,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateObservation extends CreateRecord
 {
     protected static string $resource = ObservationResource::class;
+
 }

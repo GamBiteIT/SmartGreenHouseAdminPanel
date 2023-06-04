@@ -30,7 +30,12 @@ class Temperature extends LineChartWidget
     {
         $season_id = Season::latest()->first();
         // $data = SensorData::orderBy('created_at','ASC')->get();
-        $data = $season_id->sensordata()->orderBy('created_at','ASC')->get();
+        if($season_id == null){
+            $data = collect();
+        }else{
+             $data = $season_id->sensordata()->orderBy('created_at','ASC')->get();
+        }
+
         return [
             'datasets' => [
                 [
