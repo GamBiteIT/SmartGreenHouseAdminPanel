@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SensorDataResource\Widgets;
 
+use App\Models\Season;
 use Carbon\Carbon;
 use App\Models\SensorData;
 use Filament\Tables\Columns\ColorColumn;
@@ -54,7 +55,8 @@ protected function getOptions(): array
         $dateen = $dateen->toDateString();
     }
 
-    $query = SensorData::query();
+    $query = Season::latest()->first()->sensordata();
+
 
     if ($dateStart !== null && $dateEnd !== null) {
         $query->whereBetween('created_at', [$datest, $dateen]);
@@ -64,6 +66,7 @@ protected function getOptions(): array
         $query->whereDate('created_at', '<', $dateen);
     }
 
+    // $data =$season_latest->sensordata()->orderBy('created_at','ASC')->get();
     $data = $query->orderBy('created_at','ASC')->get();
 
 

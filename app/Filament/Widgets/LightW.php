@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Season;
 use App\Models\SensorData;
 use Filament\Widgets\LineChartWidget;
 
@@ -28,7 +29,9 @@ class LightW extends LineChartWidget
     ];
     protected function getData(): array
     {
-        $data = SensorData::orderBy('created_at','ASC')->get();
+        $season_id = Season::latest()->first();
+        // $data = SensorData::orderBy('created_at','ASC')->get();
+        $data = $season_id->sensordata()->orderBy('created_at','ASC')->get();
         return [
             'datasets' => [
                 [

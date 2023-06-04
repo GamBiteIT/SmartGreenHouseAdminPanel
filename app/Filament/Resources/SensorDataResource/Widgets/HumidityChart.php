@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\SensorDataResource\Widgets;
 
 use Carbon\Carbon;
+use App\Models\Season;
 use App\Models\SensorData;
 use Filament\Widgets\LineChartWidget;
 use Filament\Forms\Components\TextInput;
@@ -50,7 +51,7 @@ protected function getOptions(): array
         $dateen = $dateen->toDateString();
     }
 
-    $query = SensorData::query();
+    $query = Season::latest()->first()->sensordata();
 
     if ($dateStart !== null && $dateEnd !== null) {
         $query->whereBetween('created_at', [$datest, $dateen]);

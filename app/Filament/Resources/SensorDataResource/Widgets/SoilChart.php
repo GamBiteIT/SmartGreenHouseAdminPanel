@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\SensorDataResource\Widgets;
 
 use Carbon\Carbon;
+use App\Models\Season;
 use App\Models\SensorData;
 use Filament\Forms\Components\DatePicker;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
@@ -65,7 +66,7 @@ protected static bool $deferLoading = true;
             $dateen = $dateen->toDateString();
         }
 
-        $query = SensorData::query();
+        $query = Season::latest()->first()->sensordata();
 
         if ($dateStart !== null && $dateEnd !== null) {
             $query->whereBetween('created_at', [$datest, $dateen]);
