@@ -47,7 +47,7 @@ class DataStatsOverview extends BaseWidget
                 $situationL = "Light";
                 $colorL = "success";
      }else{
-                if($param->TemperatureValeur>$data->temperature){
+                if($param->TemperatureValeur_max>$data->temperature){
                     $situation = "Cool";
                     $colorTemp = 'success';
                 }else{
@@ -69,7 +69,7 @@ class DataStatsOverview extends BaseWidget
                     $situationS = "Wet";
                     $colorS = 'success';
                 }
-                if($param->LightValeur>$data->light){
+                if($param->LightValeur_max>$data->light){
                     $situationL = "Dark";
                     $colorL = 'danger';
                 }else{
