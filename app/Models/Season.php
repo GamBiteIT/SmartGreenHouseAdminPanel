@@ -26,5 +26,8 @@ class Season extends Model
     public function device(){
         return $this->hasMany(Devices::class);
     }
+    public function observation(){
+        return $this->hasOne(Observation::class);
+    }
 
 }

@@ -53,8 +53,13 @@ public static function getGlobalSearchResultDetails(Model $record): array
                         'Tomato' => 'Tomato',
                         'Potato' => 'Potato',
                     ])->nullable(false),
-                    TextInput::make('duree_de_plontation')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Jours")->nullable(false),
+                    TextInput::make('duree_de_plontation')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Week")->nullable(false),
                     TextInput::make('productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG/HA")->nullable(false),
+                    TextInput::make('duree_floration')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Week")->nullable(false),
+                    TextInput::make('duree_nouaison')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Week")->nullable(false),
+                    TextInput::make('duree_debut_recolte')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Week")->nullable(false),
+                    TextInput::make('duree_fin_recorte')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   Week")->nullable(false),
+
 
                 ])
             ]);
@@ -67,8 +72,12 @@ public static function getGlobalSearchResultDetails(Model $record): array
                 TextColumn::make('id'),
                 TextColumn::make('name'),
                 TextColumn::make('type'),
-                TextColumn::make('duree_de_plontation'),
+                TextColumn::make('duree_de_plontation')->suffix("   Week"),
                 TextColumn::make('productivity'),
+                TextColumn::make('duree_floration')->suffix("   Week"),
+                TextColumn::make('duree_nouaison')->suffix("   Week"),
+                TextColumn::make('duree_debut_recolte')->suffix("   Week"),
+                TextColumn::make('duree_fin_recorte')->suffix("   Week")
             ])
             ->filters([
                 //

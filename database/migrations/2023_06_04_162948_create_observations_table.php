@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plants', function (Blueprint $table) {
+        Schema::create('observations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->integer('duree_de_plontation');
-            $table->float('productivity');
+            $table->foreignId('season_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->unique();
             $table->float('duree_floration')->nullable();
             $table->float('duree_nouaison')->nullable();
             $table->float('duree_debut_recolte')->nullable();
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plants');
+        Schema::dropIfExists('observations');
     }
 };
