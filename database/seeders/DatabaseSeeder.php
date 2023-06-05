@@ -32,24 +32,6 @@ class DatabaseSeeder extends Seeder
             'duree_debut_recolte'=>2,
             'duree_fin_recorte'=>2
         ]);
-        // Season::create([
-        //  'name'=>'Season 1',
-        //  'plant_id'=>1,
-        //  'start_day'=>'2023-05-01 00:00:00',
-        //  'end_day'=>'2023-07-15 00:00:00',
-        //  'quantity_planty'=>20,
-        //  'expected_productivity'=>100,
-        //  '4season'=>'éte',
-        // ]);
 
-        // Parametre::create([
-        // 'season_id'=>1,
-        // 'TemperatureValeur_max'=>29,
-        // 'TemperatureValeur_min'=>16,
-        // 'HumidityValeur'=>75,
-        // 'SoilValeur'=>550,
-        // 'LightValeur_max'=>20000,
-        // 'LightValeur_min'=>10000
-        // ]);
     }
 }

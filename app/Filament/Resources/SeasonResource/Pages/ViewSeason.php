@@ -15,7 +15,6 @@ class ViewSeason extends ViewRecord
     {
         return [
        ParametrePlant::class
-    // PlantParametres::class,
 
 
         ];

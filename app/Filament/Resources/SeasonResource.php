@@ -32,23 +32,23 @@ class SeasonResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make("name")->required()->label("Name")->nullable(false),
+                    TextInput::make("name")->required()->label("Name")->nullable(false)->visibleOn(['create','view']),
                     Select::make('plant_id')
                     ->label('Plant Name')
                     ->options(Plant::all()->pluck('name', 'id'))
-                    ->searchable()->nullable(false),
-                    DatePicker::make('start_day')->nullable(false),
-                    DatePicker::make('end_day')->nullable(false),
-                    TextInput::make('quantity_planty')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity Planty")->nullable(false),
-                    TextInput::make('expected_productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Expected Productivity")->nullable(false),
+                    ->searchable()->nullable(false)->visibleOn(['create','view']),
+                    DatePicker::make('start_day')->nullable(false)->visibleOn(['create','view']),
+                    DatePicker::make('end_day')->nullable(false)->visibleOn(['create','view']),
+                    TextInput::make('quantity_planty')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Quantity Planty")->nullable(false)->visibleOn(['create','view']),
+                    TextInput::make('expected_productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Expected Productivity")->nullable(false)->visibleOn(['create','view']),
                     Select::make('4season')->label("Les quatre saisons")
     ->options([
         'printemps' => 'Printemps',
         'été' => 'Été',
         'automne' => 'Automne',
         'hiver' => 'Hiver',
-    ])->nullable(false),
-    TextInput::make('productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Productivity")->placeholder("Please fill this field after the season")->visibleOn('edit'),
+    ])->nullable(false)->visibleOn(['create','view']),
+    TextInput::make('productivity')->numeric()->mask(fn (TextInput\Mask $mask)=>$mask ->numeric(true))->suffix("   KG")->label("Productivity")->placeholder("Please fill this field after the season")->visibleOn(['edit','view']),
                 ])
             ]);
     }
@@ -104,8 +104,8 @@ class SeasonResource extends Resource
     {
         return [
             'index' => Pages\ListSeasons::route('/'),
-            'view' => Pages\ViewSeason::route('/{record}'),
             'create' => Pages\CreateSeason::route('/create'),
+            'view' => Pages\ViewSeason::route('/{record}'),
             'edit' => Pages\EditSeason::route('/{record}/edit'),
         ];
     }
