@@ -80,6 +80,8 @@ class SeasonResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+
             ])
             ->bulkActions([
 
@@ -100,6 +102,7 @@ class SeasonResource extends Resource
     {
         return [
             'index' => Pages\ListSeasons::route('/'),
+            'view' => Pages\ViewSeason::route('/{record}'),
             'create' => Pages\CreateSeason::route('/create'),
             'edit' => Pages\EditSeason::route('/{record}/edit'),
         ];
