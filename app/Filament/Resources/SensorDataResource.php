@@ -54,6 +54,7 @@ class SensorDataResource extends Resource
                 ->form([
                     Forms\Components\DatePicker::make('created_from'),
                     Forms\Components\DatePicker::make('created_until'),
+                    Forms\Components\Checkbox::make('Today'),
                 ])
                 ->query(function (Builder $query, array $data): Builder {
                     return $query
@@ -64,6 +65,9 @@ class SensorDataResource extends Resource
                         ->when(
                             $data['created_until'],
                             fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )->when(
+                            $data['Today'],
+                            fn (Builder $query): Builder => $query->whereDate('created_at',"=",Carbon::today()->toDateString()),
                         );
                 })
 
