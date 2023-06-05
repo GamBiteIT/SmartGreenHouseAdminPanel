@@ -39,6 +39,7 @@ class SensorDataResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
@@ -55,8 +56,11 @@ class SensorDataResource extends Resource
                     Forms\Components\DatePicker::make('created_from'),
                     Forms\Components\DatePicker::make('created_until'),
                     Forms\Components\Checkbox::make('Today'),
+                    Forms\Components\Checkbox::make('Last Week'),
                 ])
                 ->query(function (Builder $query, array $data): Builder {
+                    $startOfWeek = Carbon::now()->subWeek()->startOfWeek();
+        $endOfWeek = Carbon::now()->subWeek()->endOfWeek();
                     return $query
                         ->when(
                             $data['created_from'],
@@ -68,6 +72,9 @@ class SensorDataResource extends Resource
                         )->when(
                             $data['Today'],
                             fn (Builder $query): Builder => $query->whereDate('created_at',"=",Carbon::today()->toDateString()),
+                        )->when(
+                            $data['Last Week'],
+                            fn (Builder $query): Builder => $query->whereBetween('created_at', [$startOfWeek, $endOfWeek]),
                         );
                 })
 
