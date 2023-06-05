@@ -94,6 +94,8 @@ class SeasonResource extends Resource
             RelationManagers\ParametresRelationManager::class,
             RelationManagers\SensordataRelationManager::class,
             RelationManagers\ExtraRelationManager::class,
+            RelationManagers\ObservationRelationManager::class,
+
 
         ];
     }
