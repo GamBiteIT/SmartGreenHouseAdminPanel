@@ -18,13 +18,13 @@ class ListObservations extends ListRecords
             // Actions\CreateAction::make(),
         ];
     }
-    protected function getHeaderWidgets(): array
-    {
-        return [
-       ParametrePlant::class
-    // PlantParametres::class,
+    // protected function getHeaderWidgets(): array
+    // {
+    //     return [
+    //    ParametrePlant::class
+    // // PlantParametres::class,
 
 
-        ];
-    }
+    //     ];
+    // }
 }
