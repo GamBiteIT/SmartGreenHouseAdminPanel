@@ -61,6 +61,7 @@ class SensorDataResource extends Resource
                 ->query(function (Builder $query, array $data): Builder {
                     $startOfWeek = Carbon::now()->subWeek()->startOfWeek();
         $endOfWeek = Carbon::now()->subWeek()->endOfWeek();
+        $endOfWeek = $endOfWeek->addDay(1);
                     return $query
                         ->when(
                             $data['created_from'],
