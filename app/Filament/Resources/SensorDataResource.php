@@ -2,19 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SensorDataResource\Pages;
-use App\Filament\Resources\SensorDataResource\RelationManagers;
+use Carbon\Carbon;
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\SensorData;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TernaryFilter;
 use App\Filament\Widgets\DataStatsOverview;
 use App\Filament\Widgets\TemperatureChartApex;
-use App\Models\SensorData;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SensorDataResource\Pages;
+use App\Filament\Resources\SensorDataResource\RelationManagers;
 
 class SensorDataResource extends Resource
 {
@@ -45,7 +50,23 @@ class SensorDataResource extends Resource
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
-                //
+                Filter::make('created_at')
+                ->form([
+                    Forms\Components\DatePicker::make('created_from'),
+                    Forms\Components\DatePicker::make('created_until'),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        );
+                })
+
             ])
             ->actions([
 
