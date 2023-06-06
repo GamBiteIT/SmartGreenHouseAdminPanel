@@ -37,7 +37,6 @@ class DeviceRelationManager extends RelationManager
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('season.name')->label("Season Name"),
                 BooleanColumn::make('fan')->label("FAN"),
                 BooleanColumn::make('pump')->label("PUMP"),
                 BooleanColumn::make('led')->label("LED"),
