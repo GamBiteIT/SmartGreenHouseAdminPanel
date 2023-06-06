@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Devices;
@@ -9,14 +10,21 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Widgets\DevicesStatsOverview;
 use App\Filament\Resources\DevicesResource\Pages;
 use App\Filament\Resources\DevicesResource\RelationManagers;
-use App\Filament\Widgets\DevicesStatsOverview;
-use Filament\Tables\Columns\BooleanColumn;
+use App\Filament\Resources\DevicesResource\Pages\ListDevices;
+use App\Filament\Resources\DevicesResource\Pages\CreateDevices;
 
 class DevicesResource extends Resource
 {
@@ -68,13 +76,41 @@ class DevicesResource extends Resource
                 ->options([
                     true => 'ON',
                     false=>'OFF'
-
+                ]),
+                Filter::make('created_at')
+                ->form([
+                    Forms\Components\DatePicker::make('created_from'),
+                    Forms\Components\DatePicker::make('created_until'),
+                    Forms\Components\Checkbox::make('Today'),
+                    Forms\Components\Checkbox::make('Last Week'),
                 ])
+                ->query(function (Builder $query, array $data): Builder {
+                    $startOfWeek = Carbon::now()->subWeek()->startOfWeek();
+        $endOfWeek = Carbon::now()->subWeek()->endOfWeek();
+        $endOfWeek = $endOfWeek->addDay(1);
+                    return $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )->when(
+                            $data['Today'],
+                            fn (Builder $query): Builder => $query->whereDate('created_at',"=",Carbon::today()->toDateString()),
+                        )->when(
+                            $data['Last Week'],
+                            fn (Builder $query): Builder => $query->whereBetween('created_at', [$startOfWeek, $endOfWeek]),
+                        );
+                })
+
+
             ])
             ->actions([
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -89,7 +125,7 @@ class DevicesResource extends Resource
     {
         return [
             'index' => Pages\ListDevices::route('/'),
-            'create' => Pages\CreateDevices::route('/create'),
+            // 'create' => Pages\CreateDevices::route('/create'),
         ];
     }
 }
