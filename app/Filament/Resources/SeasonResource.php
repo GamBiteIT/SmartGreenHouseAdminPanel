@@ -93,6 +93,7 @@ class SeasonResource extends Resource
         return [
             RelationManagers\ParametresRelationManager::class,
             RelationManagers\SensordataRelationManager::class,
+            RelationManagers\DeviceRelationManager::class,
             RelationManagers\ExtraRelationManager::class,
             RelationManagers\ObservationRelationManager::class,
 

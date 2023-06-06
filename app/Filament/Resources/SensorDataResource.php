@@ -43,7 +43,7 @@ class SensorDataResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label("ID")->sortable(),
-                TextColumn::make('season_id')->label("Season ID"),
+                TextColumn::make('season.name')->label("Season ID"),
                 TextColumn::make('temperature')->suffix("   °C")->sortable(),
                 TextColumn::make('humidity')->suffix("   %")->sortable(),
                 TextColumn::make('soil')->suffix("   %")->sortable(),
