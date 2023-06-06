@@ -32,7 +32,7 @@ class SeasonResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make("name")->required()->label("Name")->nullable(false)->visibleOn(['create','view']),
+                    TextInput::make("name")->required()->unique()->label("Name")->nullable(false)->visibleOn(['create','view']),
                     Select::make('plant_id')
                     ->label('Plant Name')
                     ->options(Plant::all()->pluck('name', 'id'))
