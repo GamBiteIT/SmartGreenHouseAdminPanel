@@ -23,7 +23,7 @@ class ParametrePlant extends BaseWidget
         $plant = $this->record->plant;
         $date_start  =  $this->record->start_day;
         $today = Carbon::today();
-        $date = Carbon::createFromFormat('Y-m-d', $date_start);
+        $date = Carbon::createFromFormat('Y-m-d 00:00:00', $date_start);
         $daysDifference = $today->diffInDays($date);
         $weeks = Carbon::now()->addDays($daysDifference)->diffInWeeks();
 

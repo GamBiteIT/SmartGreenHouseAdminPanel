@@ -16,7 +16,7 @@ class ParametresRelationManager extends RelationManager
 {
     protected static string $relationship = 'parametres';
 
-    protected static ?string $recordTitleAttribute = 'TemperatureValeur_max';
+    protected static ?string $recordTitleAttribute = 'season_id.name';
 
     public static function form(Form $form): Form
     {
