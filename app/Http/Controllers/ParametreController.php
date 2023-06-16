@@ -16,10 +16,10 @@ class ParametreController extends Controller
         $parametre = Parametre::latest()->first();
         return response()->json([
         'season_id'=>$parametre->season_id,
-          'TemperatureValeur' =>$parametre->TemperatureValeur,
+          'TemperatureValeur' =>$parametre->TemperatureValeur_max,
           'HumidityValeur'=>$parametre->HumidityValeur,
           'SoilValeur'=>$parametre->SoilValeur,
-          'LightValeur'=>$parametre->LightValeur
+          'LightValeur'=>$parametre->LightValeur_max
         ]);
     }
 
